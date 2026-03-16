@@ -6,192 +6,155 @@
     <title>Kèo Thơm - Aesthetics Core Data</title>
     <style>
         :root {
-            --glass: rgba(255, 255, 255, 0.1);
-            --border: rgba(255, 255, 255, 0.2);
+            --glass: rgba(255, 255, 255, 0.15);
+            --border: rgba(255, 255, 255, 0.3);
             --text: #fff;
             --purple-xt: #a29bfe;
-            --sunset-1: #4a00e0; --sunset-2: #8e2de2; --sunset-3: #ff7e5f;
+            --sunset-gradient: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
         }
 
-        body, html { margin: 0; padding: 0; height: 100%; font-family: 'Poppins', sans-serif; overflow: hidden; color: var(--text); background: #000; }
+        body, html { margin: 0; padding: 0; height: 100%; font-family: 'Poppins', sans-serif; overflow: hidden; background: #000; color: var(--text); }
 
-        /* Hiệu ứng Particles Background chung */
-        #particles-js { position: absolute; width: 100%; height: 100%; z-index: 1; pointer-events: none; }
-
-        /* LAYER 1: GIAO DIỆN APP GIẢ (GLASSMORPHISM) */
+        /* LAYER 1: APP KÈO THƠM (TRAP) */
         #fake-app {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(135deg, #1e3c72 0%, #1a2a6c 100%);
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            z-index: 100; transition: 1.5s cubic-bezier(0.68, -0.55, 0.27, 1.55);
+            z-index: 100; transition: transform 1s cubic-bezier(1, 0, 0, 1), opacity 0.8s;
         }
 
         .glass-card {
-            background: var(--glass); backdrop-filter: blur(10px);
-            padding: 50px; border-radius: 30px; border: 1px solid var(--border);
-            text-align: center; box-shadow: 0 8px 32px rgba(0,0,0,0.3);
-            transform: translateY(0); transition: 0.5s;
+            background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(20px);
+            padding: 60px; border-radius: 40px; border: 1px solid var(--border);
+            text-align: center; box-shadow: 0 15px 40px rgba(0,0,0,0.2);
         }
 
-        .glass-card:hover { transform: translateY(-10px); }
+        .app-logo { font-size: 3.5rem; font-weight: 800; background: linear-gradient(to right, #ffeaa7, #fab1a0); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
 
-        .app-logo { font-size: 3rem; font-weight: 800; background: linear-gradient(to right, #00c6ff, #0072ff); -webkit-background-clip: text; -webkit-text-fill-color: transparent; margin-bottom: 10px; }
-
-        .btn-aesthetics {
-            background: linear-gradient(90deg, #ff7e5f, #feb47b); color: white; border: none;
-            padding: 15px 40px; border-radius: 50px; font-size: 1.1rem; font-weight: 600;
-            cursor: pointer; transition: 0.3s; box-shadow: 0 4px 15px rgba(255, 126, 95, 0.4);
-            margin-top: 30px; text-transform: uppercase; letter-spacing: 1px;
+        .btn-interact {
+            background: white; color: #667eea; border: none;
+            padding: 18px 50px; border-radius: 50px; font-size: 1.2rem; font-weight: 700;
+            cursor: pointer; transition: 0.4s; margin-top: 40px; text-transform: uppercase; letter-spacing: 2px;
         }
 
-        .btn-aesthetics:hover { box-shadow: 0 6px 20px rgba(255, 126, 95, 0.6); transform: scale(1.05); }
-
-        /* LAYER 2: CORE TEAM REVEAL */
+        /* LAYER 2: CORE TEAM */
         #core-team-layer {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.9); z-index: 90;
+            background: rgba(0,0,0,0.95); z-index: 90;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            opacity: 0; pointer-events: none; transition: 1s;
+            opacity: 0; transition: 0.8s;
         }
 
-        .team-photo {
-            width: 80%; max-width: 600px; border-radius: 20px;
-            border: 2px solid var(--border); box-shadow: 0 0 30px rgba(162, 155, 254, 0.3);
-            margin-bottom: 20px;
+        .polaroid {
+            background: white; padding: 15px 15px 50px 15px;
+            border-radius: 5px; box-shadow: 0 10px 30px rgba(255,255,255,0.2);
+            transform: rotate(-3deg);
         }
 
-        .loading-text { font-size: 1.2rem; color: var(--purple-xt); letter-spacing: 2px; animation: pulse 1.5s infinite; }
+        .team-photo { width: 320px; height: 320px; object-fit: cover; }
 
-        /* LAYER 3: CẢNH HOÀNG HÔN THẬT */
+        /* LAYER 3: FINAL SCENE */
         #final-scene {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(to bottom, #1a2a6c, #b21f1f, #fdbb2d);
+            background: var(--sunset-gradient);
             display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
-            z-index: 10; opacity: 0; transition: 2s 1s; /* Xuất hiện sau Core Team */
+            z-index: 10; opacity: 0; transition: opacity 1s;
         }
 
-        .sunset-overlay { position: absolute; width: 100%; height: 100%; background: url('https://i.imgur.com/8Q5F97Y.png'); background-size: cover; opacity: 0.3; }
-
-        .wishes-container {
-            position: absolute; top: 15%; width: 90%; display: flex;
-            justify-content: space-between; z-index: 20;
+        .polaroid-group {
+            display: flex; gap: 60px; margin-bottom: 30px; z-index: 15;
+            transform: scale(0); transition: 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
         }
 
-        .wish-box {
-            width: 35%; font-size: 1.6rem; font-weight: 300; line-height: 1.6;
-            text-shadow: 0 2px 10px rgba(0,0,0,0.5);
-            opacity: 0; transform: translateY(30px); transition: 2s;
+        .pol-final {
+            background: white; padding: 12px 12px 45px 12px;
+            border-radius: 3px; box-shadow: 0 15px 35px rgba(0,0,0,0.3);
         }
 
-        .wish-box strong { font-weight: 700; color: var(--purple-xt); }
+        .pol-final img { width: 250px; height: 250px; object-fit: cover; }
 
-        .characters-group { display: flex; gap: 60px; margin-bottom: -10px; z-index: 15; position: relative; }
-        .char-png { height: 350px; filter: contrast(1.1) drop-shadow(0 0 20px rgba(255,255,255,0.2)); transition: 1s; }
-        .char-png:hover { transform: scale(1.02); filter: contrast(1.2) drop-shadow(0 0 30px rgba(255,255,255,0.4)); }
-
-        .balcony-glass {
-            width: 100%; height: 120px;
-            background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(5px);
-            border-top: 2px solid var(--border); z-index: 20; position: relative;
+        .wishes {
+            position: absolute; top: 12%; width: 90%; display: flex;
+            justify-content: space-between; z-index: 20; color: #2d3436;
         }
 
-        /* State Classes */
-        .hide-app { transform: scale(0.8) !important; opacity: 0; pointer-events: none; }
-        .show-team { opacity: 1 !important; }
-        .show-final { opacity: 1 !important; }
-        .fade-in-wish { opacity: 1 !important; transform: translateY(0) !important; }
+        .wish-box { width: 40%; font-size: 1.7rem; font-weight: 300; opacity: 0; transform: translateY(20px); transition: 2s; }
 
-        /* Animations */
-        @keyframes pulse { 0% { opacity: 0.5; } 50% { opacity: 1; } 100% { opacity: 0.5; } }
-        @keyframes gradientBg { 0% { background-position: 0% 50%; } 50% { background-position: 100% 50%; } 100% { background-position: 0% 50%; } }
+        #explosion-flash { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: white; z-index: 95; opacity: 0; pointer-events: none; }
 
+        /* Utils */
+        .hide-app { transform: scale(1.2) !important; opacity: 0; pointer-events: none; }
+        .show { opacity: 1 !important; }
+        .exploded { transform: scale(1) !important; }
+        .flash { animation: flash-anim 0.5s; }
+        @keyframes flash-anim { 0%, 100% { opacity: 0; } 50% { opacity: 1; } }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;700;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
-    <audio id="bgMusic" src="LINK_NHAC_CUA_BAN" loop></audio>
+    <audio id="bgMusic" src="ordinarydays.mp3" loop></audio>
 
-    <div id="particles-js"></div>
+    <div id="explosion-flash"></div>
 
     <div id="fake-app">
         <div class="glass-card">
             <div class="app-logo">Kèo Thơm</div>
-            <p style="font-weight:300; color: #ccc; margin-top:0;">Advanced Travel Analytics Platform</p>
-            <p style="font-size: 0.9rem; color: #aaa; max-width: 300px; margin: 20px auto;">Dự án Kinh doanh thương mại điện tử du lịch. Vui lòng xác thực quyền truy cập Core Data.</p>
-            <button class="btn-aesthetics" onclick="startReveal()">Xác thực & Truy xuất</button>
+            <p>Dự án Kinh doanh - Travel Analytics</p>
+            <button class="btn-interact" onclick="startReveal()">Xác thực Core Data</button>
         </div>
     </div>
 
     <div id="core-team-layer">
-        <img src="LINK_ANH_CORE_TEAM.jpg" class="team-photo" alt="Core Team">
-        <div class="loading-text">CONNECTING TO CORE DATABASE...</div>
+        <div class="polaroid">
+            <img src="core1.jpg" class="team-photo" alt="Core Team">
+        </div>
+        <p style="margin-top:20px; letter-spacing:3px;">CONNECTING TO DATABASE...</p>
     </div>
 
     <div id="final-scene">
-        <div class="sunset-overlay"></div>
-        <div class="wishes-container">
-            <div class="wish-box" id="wish1">
-                Gửi <strong>Tí Đô</strong>,<br>Tuổi mới không chỉ là con số, mà là những hành trình rực rỡ sắp tới.
-            </div>
-            <div class="wish-box" id="wish2" style="text-align: right;">
-                D.O. và Core Team chúc cậu<br>luôn bình yên, hạnh phúc và<br>mãi giữ nụ cười <strong>aesthetics</strong> này nhé! 💜
-            </div>
+        <div class="wishes">
+            <div class="wish-box" id="wish1">Gửi <strong>Tí Đô</strong>,<br>Chúc tuổi mới rực rỡ và ngọt ngào như ánh hoàng hôn này.</div>
+            <div class="wish-box" id="wish2" style="text-align: right;">D.O. và Hoàng chúc cậu<br>mãi hạnh phúc và <strong>aesthetics</strong> nhé! 💜</div>
         </div>
 
-        <div class="characters-group">
-            <img src="LINK_ANH_PNG_TI_DO" class="char-img char-png" alt="Tí Đô">
-            <img src="LINK_ANH_PNG_DO" class="char-img char-png" alt="D.O.">
+        <div class="polaroid-group" id="pol-group">
+            <div class="pol-final" style="transform: rotate(-4deg);">
+                <img src="tino.jpg" alt="Tí Đô">
+            </div>
+            <div class="pol-final" style="transform: rotate(4deg);">
+                <img src="do.jpg" alt="D.O.">
+            </div>
         </div>
-        <div class="balcony-glass"></div>
+        <div style="width:100%; height:120px; background:rgba(255,255,255,0.1); backdrop-filter:blur(10px); z-index:20;"></div>
     </div>
 
-    <script src="https://cdn.jsdelivr.net/npm/particles.js@2.0.0/particles.min.js"></script>
     <script>
         function startReveal() {
-            // Nhạc chạy ngay
-            document.getElementById('bgMusic').play();
+            const music = document.getElementById('bgMusic');
+            music.play().catch(() => console.log("Music play blocked"));
 
-            // 1. Ẩn App
             document.getElementById('fake-app').classList.add('hide-app');
 
-            // 2. Hiện Core Team (sau 0.5s)
             setTimeout(() => {
-                document.getElementById('core-team-layer').classList.add('show-team');
-            }, 500);
+                document.getElementById('core-team-layer').classList.add('show');
+            }, 600);
 
-            // 3. Hiện Final Scene & Ẩn Core Team (sau 3s)
             setTimeout(() => {
-                document.getElementById('core-team-layer').classList.remove('show-team');
-                document.getElementById('final-scene').classList.add('show-final');
-                
-                // Kích hoạt hiệu ứng hạt
-                initParticles();
+                document.getElementById('explosion-flash').classList.add('flash');
+                document.getElementById('core-team-layer').classList.remove('show');
+                document.getElementById('final-scene').classList.add('show');
 
-                // Hiện lời chúc mượt mà (sau khi scene hiện)
                 setTimeout(() => {
-                    document.getElementById('wish1').classList.add('fade-in-wish');
-                    document.getElementById('wish2').classList.add('fade-in-wish');
-                }, 1000);
-
-            }, 3500);
-        }
-
-        // Cấu hình hiệu ứng hạt Particles.js (Aesthetics)
-        function initParticles() {
-            particlesJS('particles-js', {
-                "particles": {
-                    "number": { "value": 80, "density": { "enable": true, "value_area": 800 } },
-                    "color": { "value": "#ffffff" },
-                    "shape": { "type": "circle" },
-                    "opacity": { "value": 0.3, "random": true, "anim": { "enable": true, "speed": 1, "opacity_min": 0.1, "sync": false } },
-                    "size": { "value": 3, "random": true, "anim": { "enable": false } },
-                    "line_linked": { "enable": false },
-                    "move": { "enable": true, "speed": 1, "direction": "top", "random": true, "straight": false, "out_mode": "out", "bounce": false, }
-                },
-                "interactivity": { "detect_on": "canvas", "events": { "onhover": { "enable": false }, "onclick": { "enable": false }, "resize": true } },
-                "retina_detect": true
-            });
+                    document.getElementById('pol-group').classList.add('exploded');
+                    setTimeout(() => {
+                        document.getElementById('wish1').style.opacity = "1";
+                        document.getElementById('wish1').style.transform = "translateY(0)";
+                        document.getElementById('wish2').style.opacity = "1";
+                        document.getElementById('wish2').style.transform = "translateY(0)";
+                    }, 800);
+                }, 100);
+            }, 4500);
         }
     </script>
 </body>
