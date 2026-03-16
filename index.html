@@ -3,93 +3,88 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Kèo Thơm - Aesthetics Core Data</title>
+    <title>Kèo Thơm - Nature Aesthetics</title>
     <style>
         :root {
-            --glass: rgba(255, 255, 255, 0.15);
-            --border: rgba(255, 255, 255, 0.3);
-            --text: #fff;
-            --purple-xt: #a29bfe;
-            --sunset-gradient: linear-gradient(135deg, #a18cd1 0%, #fbc2eb 100%);
+            --nature-green: #2d3436;
+            --sage-green: #b2bec3;
+            --forest-gradient: linear-gradient(135deg, #1e272e 0%, #2f3640 50%, #57606f 100%);
+            --soft-white: #f5f6fa;
         }
 
-        body, html { margin: 0; padding: 0; height: 100%; font-family: 'Poppins', sans-serif; overflow: hidden; background: #000; color: var(--text); }
+        body, html { margin: 0; padding: 0; height: 100%; font-family: 'Poppins', sans-serif; overflow: hidden; background: #1e272e; color: var(--soft-white); }
 
-        /* LAYER 1: APP KÈO THƠM (TRAP) */
+        /* LAYER 1: APP KÈO THƠM (SAGE GREEN GLASS) */
         #fake-app {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            background: linear-gradient(135deg, #2f3640 0%, #57606f 100%);
             display: flex; flex-direction: column; align-items: center; justify-content: center;
-            z-index: 100; transition: transform 1s cubic-bezier(1, 0, 0, 1), opacity 0.8s;
+            z-index: 100; transition: 1.2s cubic-bezier(1, 0, 0, 1);
         }
 
         .glass-card {
-            background: rgba(255, 255, 255, 0.05); backdrop-filter: blur(20px);
-            padding: 60px; border-radius: 40px; border: 1px solid var(--border);
-            text-align: center; box-shadow: 0 15px 40px rgba(0,0,0,0.2);
+            background: rgba(255, 255, 255, 0.03); backdrop-filter: blur(25px);
+            padding: 60px; border-radius: 40px; border: 1px solid rgba(255,255,255,0.1);
+            text-align: center; box-shadow: 0 20px 50px rgba(0,0,0,0.3);
         }
 
-        .app-logo { font-size: 3.5rem; font-weight: 800; background: linear-gradient(to right, #ffeaa7, #fab1a0); -webkit-background-clip: text; -webkit-text-fill-color: transparent; }
+        .app-logo { font-size: 3.2rem; font-weight: 800; color: #dff9fb; letter-spacing: -1px; }
 
         .btn-interact {
-            background: white; color: #667eea; border: none;
-            padding: 18px 50px; border-radius: 50px; font-size: 1.2rem; font-weight: 700;
-            cursor: pointer; transition: 0.4s; margin-top: 40px; text-transform: uppercase; letter-spacing: 2px;
+            background: #dff9fb; color: #2f3640; border: none;
+            padding: 18px 50px; border-radius: 50px; font-size: 1.1rem; font-weight: 700;
+            cursor: pointer; transition: 0.4s; margin-top: 40px; text-transform: uppercase;
         }
 
         /* LAYER 2: CORE TEAM */
         #core-team-layer {
             position: fixed; top: 0; left: 0; width: 100%; height: 100%;
-            background: rgba(0,0,0,0.95); z-index: 90;
+            background: rgba(10, 10, 10, 0.98); z-index: 90;
             display: flex; flex-direction: column; align-items: center; justify-content: center;
             opacity: 0; transition: 0.8s;
         }
 
-        .polaroid {
-            background: white; padding: 15px 15px 50px 15px;
-            border-radius: 5px; box-shadow: 0 10px 30px rgba(255,255,255,0.2);
-            transform: rotate(-3deg);
-        }
+        .polaroid { background: white; padding: 15px 15px 60px 15px; border-radius: 2px; box-shadow: 0 10px 40px rgba(0,0,0,0.5); transform: rotate(-2deg); }
+        .team-photo { width: 320px; height: 320px; object-fit: cover; filter: grayscale(20%); }
 
-        .team-photo { width: 320px; height: 320px; object-fit: cover; }
-
-        /* LAYER 3: FINAL SCENE */
+        /* LAYER 3: FINAL SCENE (FOREST AESTHETICS) */
         #final-scene {
             position: absolute; top: 0; left: 0; width: 100%; height: 100%;
-            background: var(--sunset-gradient);
+            background: var(--forest-gradient);
             display: flex; flex-direction: column; align-items: center; justify-content: flex-end;
-            z-index: 10; opacity: 0; transition: opacity 1s;
+            z-index: 10; opacity: 0; transition: opacity 1.5s;
         }
 
-        .polaroid-group {
-            display: flex; gap: 60px; margin-bottom: 30px; z-index: 15;
-            transform: scale(0); transition: 1s cubic-bezier(0.175, 0.885, 0.32, 1.275);
-        }
-
-        .pol-final {
-            background: white; padding: 12px 12px 45px 12px;
-            border-radius: 3px; box-shadow: 0 15px 35px rgba(0,0,0,0.3);
-        }
-
-        .pol-final img { width: 250px; height: 250px; object-fit: cover; }
+        /* Hiệu ứng sương mù/thiên nhiên mờ ảo */
+        .nature-overlay { position: absolute; width: 100%; height: 100%; background: radial-gradient(circle at center, transparent, rgba(0,0,0,0.4)); pointer-events: none; }
 
         .wishes {
-            position: absolute; top: 12%; width: 90%; display: flex;
-            justify-content: space-between; z-index: 20; color: #2d3436;
+            position: absolute; top: 12%; width: 85%; display: flex;
+            justify-content: space-between; z-index: 20; color: #dff9fb;
         }
 
-        .wish-box { width: 40%; font-size: 1.7rem; font-weight: 300; opacity: 0; transform: translateY(20px); transition: 2s; }
+        .wish-box { width: 35%; font-size: 1.6rem; font-weight: 300; opacity: 0; transform: translateY(20px); transition: 2.5s; line-height: 1.6; }
+        .wish-box strong { color: #55efc4; font-weight: 600; }
 
-        #explosion-flash { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: white; z-index: 95; opacity: 0; pointer-events: none; }
+        /* Polaroid Group (D.O. Trái - Tí Đô Phải) */
+        .polaroid-group {
+            display: flex; gap: 70px; margin-bottom: 50px; z-index: 15;
+            transform: scale(0); transition: 1.2s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+        }
 
-        /* Utils */
-        .hide-app { transform: scale(1.2) !important; opacity: 0; pointer-events: none; }
+        .pol-final { background: white; padding: 12px 12px 50px 12px; border-radius: 2px; box-shadow: 0 20px 40px rgba(0,0,0,0.4); }
+        .pol-final img { width: 260px; height: 260px; object-fit: cover; }
+
+        #explosion-flash { position: fixed; top: 0; left: 0; width: 100%; height: 100%; background: #dff9fb; z-index: 95; opacity: 0; pointer-events: none; }
+
+        /* Utils Classes */
+        .hide-app { transform: translateY(-100%); opacity: 0; }
         .show { opacity: 1 !important; }
         .exploded { transform: scale(1) !important; }
-        .flash { animation: flash-anim 0.5s; }
+        .flash { animation: flash-anim 0.6s ease-out; }
         @keyframes flash-anim { 0%, 100% { opacity: 0; } 50% { opacity: 1; } }
     </style>
-    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;700;800&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;600;800&display=swap" rel="stylesheet">
 </head>
 <body>
 
@@ -100,8 +95,8 @@
     <div id="fake-app">
         <div class="glass-card">
             <div class="app-logo">Kèo Thơm</div>
-            <p>Dự án Kinh doanh - Travel Analytics</p>
-            <button class="btn-interact" onclick="startReveal()">Xác thực Core Data</button>
+            <p style="letter-spacing: 2px; color: #b2bec3;">NATURE & TRAVEL DATA</p>
+            <button class="btn-interact" onclick="startReveal()">Truy xuất dữ liệu</button>
         </div>
     </div>
 
@@ -109,30 +104,32 @@
         <div class="polaroid">
             <img src="core1.jpg" class="team-photo" alt="Core Team">
         </div>
-        <p style="margin-top:20px; letter-spacing:3px;">CONNECTING TO DATABASE...</p>
+        <p style="margin-top:25px; letter-spacing:4px; font-weight: 300;">DECRYPTING CORE FILE...</p>
     </div>
 
     <div id="final-scene">
+        <div class="nature-overlay"></div>
         <div class="wishes">
-            <div class="wish-box" id="wish1">Gửi <strong>Tí Đô</strong>,<br> Anh em core team gửi ngàn lời chúc tuyệt vời tới tí đô</div>
-            <div class="wish-box" id="wish2" style="text-align: right;"> Chúc DO và Tí đô <br> mãi hạnh phúc <strong> bên nhau </strong> nhé! 💜</div>
+            <div class="wish-box" id="wish1">Gửi <strong>Tí Đô</strong>,<br>Chúc tuổi mới rực rỡ nhưng vẫn đầy bình yên như khu rừng này.</div>
+            <div class="wish-box" id="wish2" style="text-align: right;"> Mong Tí đô và DO <br> luôn xanh ngát, hạnh phúc và <strong> bên nhau hạnh phúc </strong>! 🌿</div>
         </div>
 
         <div class="polaroid-group" id="pol-group">
-            <div class="pol-final" style="transform: rotate(-4deg);">
-                <img src="tino.jpg" alt="Tí Đô">
-            </div>
-            <div class="pol-final" style="transform: rotate(4deg);">
+            <div class="pol-final" style="transform: rotate(-3deg);">
                 <img src="do.jpg" alt="D.O.">
             </div>
+            <div class="pol-final" style="transform: rotate(5deg);">
+                <img src="tino.jpg" alt="Tí Đô">
+            </div>
         </div>
-        <div style="width:100%; height:120px; background:rgba(255,255,255,0.1); backdrop-filter:blur(10px); z-index:20;"></div>
+        
+        <div style="width:100%; height:110px; background:rgba(255,255,255,0.05); backdrop-filter:blur(15px); border-top: 1px solid rgba(255,255,255,0.1); z-index:20;"></div>
     </div>
 
     <script>
         function startReveal() {
             const music = document.getElementById('bgMusic');
-            music.play().catch(() => console.log("Music play blocked"));
+            music.play().catch(() => console.log("User interaction required"));
 
             document.getElementById('fake-app').classList.add('hide-app');
 
@@ -140,6 +137,7 @@
                 document.getElementById('core-team-layer').classList.add('show');
             }, 600);
 
+            // BÙNG NỔ & CHUYỂN SANG THIÊN NHIÊN
             setTimeout(() => {
                 document.getElementById('explosion-flash').classList.add('flash');
                 document.getElementById('core-team-layer').classList.remove('show');
@@ -152,9 +150,9 @@
                         document.getElementById('wish1').style.transform = "translateY(0)";
                         document.getElementById('wish2').style.opacity = "1";
                         document.getElementById('wish2').style.transform = "translateY(0)";
-                    }, 800);
-                }, 100);
-            }, 4500);
+                    }, 1000);
+                }, 200);
+            }, 4000); // Đợi 4s ở Layer 2 để tạo sự tò mò
         }
     </script>
 </body>
